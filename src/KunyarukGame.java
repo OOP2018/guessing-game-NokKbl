@@ -30,7 +30,7 @@ public class KunyarukGame extends NumberGame{
 		this.upperBound = upperbound;
 		long seed = System.nanoTime();
 		Random ran = new Random(seed);
-		this.secret = ran.nextInt(this.upperBound)+1;
+		this.secret = ran.nextInt(this.upperBound) + 1;
 		super.setMessage("Can you guess a number between 1 and "+this.upperBound+" that I'm thinking of?");
 	}
 	
@@ -45,11 +45,11 @@ public class KunyarukGame extends NumberGame{
 			countRound++;
 			return true;
 		}
-		if(number < secret) {
-			setMessage("Umm, I think that's too small.");
-		}else {
-			setMessage("Oh! I think your answer is too large.");
-		}
+		
+		if (number < secret && number >= 1) setMessage("Umm, I think that's too small.");
+		else if (number > secret && number <= this.upperBound) setMessage("Oh! I think your answer is too large.");
+		else setMessage("Oops! It's out of bound!!");
+		
 		countRound++;
 		return false;
 	}
