@@ -16,6 +16,10 @@ public class KunyarukGame extends NumberGame{
     /** Initialize a new default game. */
     public KunyarukGame() {
     		this(321);
+    		long seed = System.nanoTime();
+    		Random ran = new Random(seed);
+    		this.secret = ran.nextInt(this.upperBound)+1;
+    		super.setMessage("Can you guess a number between 1 and "+this.upperBound+" that I'm thinking of?");
     }
     
     /**
@@ -23,12 +27,11 @@ public class KunyarukGame extends NumberGame{
      * @param upperbound is the max value for the secret number (>1).
      */
 	public KunyarukGame(int upperbound) {
-		final int lowerBound = 4;
 		this.upperBound = upperbound;
 		long seed = System.nanoTime();
 		Random ran = new Random(seed);
 		this.secret = ran.nextInt(this.upperBound)+1;
-		super.setMessage("Can you guess a number between "+lowerBound+" and "+this.upperBound+" that I'm thinking of?");
+		super.setMessage("Can you guess a number between 1 and "+this.upperBound+" that I'm thinking of?");
 	}
 	
 	/**

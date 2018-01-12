@@ -10,10 +10,21 @@ public class GameSolver {
 	 * @return the correct answer
 	 */
 	public int play(NumberGame game) {
-		for (int guessNum = 0; guessNum <= game.getUpperBound(); guessNum++) {
-			boolean correct = game.guess(guessNum);
-			if (correct) return guessNum;
+		int HALF_DIVISOR = 2;
+		int newBound = 0;
+		int guessLowerBound = 1;
+		int guessUpperBound = game.getUpperBound()+1;
+		
+		while(true) {
+			newBound = (guessLowerBound + guessUpperBound)/HALF_DIVISOR;
+			game.guess(newBound);
+			if (game.getMessage().contains("too small")) {
+				guessLowerBound = newBound;
+			}else if (game.getMessage().contains("too large")) {
+				guessUpperBound = newBound;
+			}else {
+				return newBound;
+			}
 		}
-		return 0;
 	}
 }
