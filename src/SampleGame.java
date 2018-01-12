@@ -2,7 +2,7 @@ import java.util.Random;
 /**
  * Example guessing game.
  * 
- * @author Your Name
+ * @author Kunyaruk Katebunlu
  * @version 2018.01.11
  */
 public class SampleGame extends NumberGame {
@@ -12,7 +12,7 @@ public class SampleGame extends NumberGame {
     private int secret;
     
 	/** count guesses */
-//TODO add an attribute to count guesses
+    //TODO add an attribute to count guesses
 
     /** Initialize a new default game. */
     public SampleGame()

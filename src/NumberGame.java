@@ -5,6 +5,8 @@
  * 
  * Your class should not override getMessage() and setMessage(),
  * just use the methods from this class.
+ * 
+ * @author Kunyaruk Katebunlu
  */
 public class NumberGame {
 	/** A helpful message for user. */
@@ -54,6 +56,13 @@ public class NumberGame {
 		return Integer.MAX_VALUE;  // not very helpful :-)
 	}
     
+	/**
+	 * Get the total number of round that player guess.
+	 */
+	public int getCount() {
+		return 0;
+	}
+	
     /**
      * toString describes the game or problem.
      * @return description of this game or the problem to be solved.
