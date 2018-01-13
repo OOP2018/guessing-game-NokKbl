@@ -10,7 +10,9 @@ public class Main {
 		// upper limit for secret number in guessing game
 		int upperBound = 144;
 		NumberGame game = new KunyarukGame(upperBound);
-		GameConsole ui = new GameConsole( );
+		GameConsole ui = new GameConsole( );	
+//		GameSolver solv = new GameSolver();
+//		System.out.println("Ans " + solv.play(game));		
 		int solution = ui.play( game );
 		
 		// display the answer returned by play

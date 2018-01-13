@@ -15,18 +15,17 @@ public class GameSolver {
 	 * @return the correct answer
 	 */
 	public int play(NumberGame game) {
-		int DIVISOR = 2;
 		int newBound = 0;
-		int guessLowerBound = 0;
-		int guessUpperBound = game.getUpperBound() + 1;
+		int guessLowerBound = 1;
+		int guessUpperBound = game.getUpperBound();
 		
 		while(true) {
-			newBound = (guessLowerBound + guessUpperBound)/DIVISOR;
+			newBound = guessLowerBound + (guessUpperBound - guessLowerBound)/2;
 			game.guess(newBound);
 			
-			if (game.getMessage().contains("too small")) guessLowerBound = newBound;
-			else if (game.getMessage().contains("too large")) guessUpperBound = newBound;
-			else if(game.getMessage().contains("Correct")) return newBound;
+			if (game.getMessage().contains("too small")) guessLowerBound = newBound+1;
+			else if (game.getMessage().contains("too large")) guessUpperBound = newBound-1;
+			else return newBound;
 		}
 	}
 }
