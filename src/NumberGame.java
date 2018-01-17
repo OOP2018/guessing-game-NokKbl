@@ -15,7 +15,7 @@ public class NumberGame {
     /** Initialize a new default game. */
     public NumberGame() {
 		// initialize your game.
-    	message = "";
+    		message = "";
     }
    
     /**
@@ -24,7 +24,6 @@ public class NumberGame {
      * @return true if correct, false otherwise
      */
     public boolean guess(int answer) {
-		// TODO your subclass should override this method
 		message = "Sorry, that's not correct";
 		return false;
     }
@@ -58,6 +57,7 @@ public class NumberGame {
     
 	/**
 	 * Get the total number of round that player guess.
+	 * @return the number of round that player guess.
 	 */
 	public int getCount() {
 		return 0;

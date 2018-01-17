@@ -54,12 +54,16 @@ public class KunyarukGame extends NumberGame{
 		return false;
 	}
 	
-	/** Get an upper bound of the game */
+	/** Get an upper bound of the game.
+	 * @return the upper bound number of the game.
+	 */
 	public int getUpperBound() {
 		return this.upperBound;
 	}
     
-	/** Get number of round that player guess */
+	/** Get number of round that player guess.
+	 * @return the total number of round that player guess.
+	 */
 	public int getCount() {
 		return this.countRound;
 	}

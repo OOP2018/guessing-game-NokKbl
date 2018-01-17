@@ -14,18 +14,24 @@ public class GameSolver {
 	 * @param game is the NumberGame to solve
 	 * @return the correct answer
 	 */
-	public int play(NumberGame game) {
+	public int play (NumberGame game) {
 		int newBound = 0;
 		int guessLowerBound = 1;
 		int guessUpperBound = game.getUpperBound();
+		boolean runLoop = true;
 		
-		while(true) {
+		while(runLoop) {
 			newBound = guessLowerBound + (guessUpperBound - guessLowerBound)/2;
-			game.guess(newBound);
+			runLoop = game.guess(newBound);
 			
-			if (game.getMessage().contains("too small")) guessLowerBound = newBound+1;
-			else if (game.getMessage().contains("too large")) guessUpperBound = newBound-1;
-			else return newBound;
+			if (game.getMessage().contains("too small")) {
+				guessLowerBound = newBound + 1;
+				runLoop = !runLoop;
+			} else if (game.getMessage().contains("too large")) {
+				guessUpperBound = newBound - 1;
+				runLoop = !runLoop;
+			} else runLoop = !runLoop;
 		}
+		return newBound;
 	}
 }
