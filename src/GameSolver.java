@@ -18,19 +18,15 @@ public class GameSolver {
 		int newBound = 0;
 		int guessLowerBound = 1;
 		int guessUpperBound = game.getUpperBound();
-		boolean runLoop = true;
+		boolean correct = false;
 		
-		while(runLoop) {
+		while(!correct) {
 			newBound = guessLowerBound + (guessUpperBound - guessLowerBound)/2;
-			runLoop = game.guess(newBound);
+			correct = game.guess(newBound);
 			
-			if (game.getMessage().contains("too small")) {
-				guessLowerBound = newBound + 1;
-				runLoop = !runLoop;
-			} else if (game.getMessage().contains("too large")) {
-				guessUpperBound = newBound - 1;
-				runLoop = !runLoop;
-			} else runLoop = !runLoop;
+			if (game.getMessage().contains("too small")) guessLowerBound = newBound + 1;
+			else if (game.getMessage().contains("too large")) guessUpperBound = newBound - 1;
+			else break;
 		}
 		return newBound;
 	}
