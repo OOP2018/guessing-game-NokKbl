@@ -8,7 +8,7 @@
  * 
  * @author Kunyaruk Katebunlu
  */
-public class NumberGame {
+public class NumberGame extends java.util.Observable {
 	/** A helpful message for user. */
 	private String message;
 

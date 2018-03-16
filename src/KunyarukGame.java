@@ -5,7 +5,7 @@ import java.util.Random;
  * @author Kunyaruk Katebunlu
  * @version 2018.01.12
  */
-public class KunyarukGame extends NumberGame{
+public class KunyarukGame extends NumberGame {
     /** upper bound for secret number */
     private int upperBound;
     /** the solution to the game */
@@ -46,8 +46,8 @@ public class KunyarukGame extends NumberGame{
 			return true;
 		}
 		
-		if (number < secret && number >= 1) setMessage("Umm, I think that's too small.");
-		else if (number > secret && number <= this.upperBound) setMessage("Oh! I think your answer is too large.");
+		if (number < secret && number >= 1) setMessage("Umm, " + number + " is too small.");
+		else if (number > secret && number <= this.upperBound) setMessage("Oh! " + number + " is too large.");
 		else setMessage("Oops! It's out of bound!!");
 		
 		countRound++;

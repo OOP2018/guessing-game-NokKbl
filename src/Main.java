@@ -1,3 +1,12 @@
+import java.net.URL;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  * A main class for the GuessingGame.
  * It is responsible for creating objects, 
@@ -5,19 +14,46 @@
  * 
  * @author Kunyaruk Katebunlu
  */
-public class Main {
-	public static void main(String[] args) {
-		// upper limit for secret number in guessing game
-		int upperBound = 144;
-		NumberGame game = new KunyarukGame(upperBound);
-		GameConsole ui = new GameConsole( );	
-//		GameSolver solv = new GameSolver();
-//		System.out.println("Ans " + solv.play(game));		
-		int solution = ui.play( game );
+public class Main extends Application {
+	public static final String UI_FILE = "GuessingGameUI.fxml";
+	
+	/**
+	 * The start method is called after the init method has returned,
+	 * and after the system is ready for the application to begin running.
+	 * @param primaryStage is the stage for this application which the application scene can be set.
+	 */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		KunyarukGame game = new KunyarukGame();
 		
-		// display the answer returned by play
-		System.out.println("play() returned " + solution);
-		// display how many guesses the user made
-		System.out.println("You've made " + game.getCount() + " guesses.");
+		try {
+			URL url = getClass().getResource("GuessingGameUI.fxml");
+			if (url == null) {
+				System.out.println("Couldn't find file: GuessingGameUI.fxml");
+				Platform.exit();
+			}
+			FXMLLoader loader = new FXMLLoader(url);
+			Parent root = loader.load();
+			GuessingGameController controller = loader.getController();
+			
+			// Dependency Injection:
+			controller.init();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.sizeToScene();
+			primaryStage.setTitle("Guessing Game");
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		ConsoleView view = new ConsoleView(game);
+		game.addObserver(view);
 	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
 }
