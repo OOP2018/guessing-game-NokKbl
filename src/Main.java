@@ -16,7 +16,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	public static final String UI_FILE = "GuessingGameUI.fxml";
-	
 	/**
 	 * The start method is called after the init method has returned,
 	 * and after the system is ready for the application to begin running.
@@ -24,7 +23,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		KunyarukGame game = new KunyarukGame();
+		NumberGame game = new KunyarukGame();
 		
 		try {
 			URL url = getClass().getResource("GuessingGameUI.fxml");
@@ -48,7 +47,7 @@ public class Main extends Application {
 			return;
 		}
 		
-		ConsoleView view = new ConsoleView(game);
+		GameConsole view = new GameConsole(game);
 		game.addObserver(view);
 	}
 	

@@ -13,7 +13,7 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	/** the stage (top-level window) for showing scene */
 	private Stage stage;
 	/** a counter to show value of */
-	private KunyarukGame game;
+	private NumberGame game;
 	/** the label that shows the counter value. */
 	private Label label;
 	
@@ -21,7 +21,7 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	 * Initialize a CounterView, which shows value of a counter.
 	 * @param counter the Counter to show.
 	 */
-	public LastGuessView(KunyarukGame game) {
+	public LastGuessView(NumberGame game) {
 		this.game = game;
 		initComponents();
 	}

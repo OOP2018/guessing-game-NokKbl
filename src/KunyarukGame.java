@@ -48,7 +48,7 @@ public class KunyarukGame extends NumberGame {
 		
 		if (number < secret && number >= 1) setMessage("Umm, " + number + " is too small.");
 		else if (number > secret && number <= this.upperBound) setMessage("Oh! " + number + " is too large.");
-		else setMessage("Oops! It's out of bound!!");
+		else setMessage("Oops! Please input a valid number!!");
 		
 		countRound++;
 		return false;

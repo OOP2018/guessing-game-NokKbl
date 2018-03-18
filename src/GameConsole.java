@@ -1,33 +1,27 @@
-import java.util.Scanner;
+import java.util.Observable;
 
-/** 
- *  Play guessing game on the console.
- *  @author Kunyaruk Katebunlu
+/**
+ * Print the counter value on the console whenever it changes.
+ * @author Kunyaruk Katebunlu
  */
-public class GameConsole {
+public class GameConsole implements java.util.Observer {
+	NumberGame game;
 
-	/**
-	 * This play method use to play a game by getting input from a player.
-	 * @param game is the NumberGame to play.
-	 * @return a number that player guess
-	 */
-	public int play(NumberGame game) {
-		Scanner console = new Scanner(System.in);
-		
-		// describe the game
-		System.out.println( game.toString() );
-		
-		//play game and print message by using loop
-		System.out.println(game.getMessage());
-		while(true) {
-			System.out.print("Your answer? ");
-			int guess = console.nextInt();
-			boolean correct = game.guess(guess);
-			System.out.println(game.getMessage());
-			if (correct) {
-				return guess;
-			}
+		/**
+		 * A ConsoleView with reference to a counter (the subject).
+		 * @param counter the counter to display.
+		 */
+		public GameConsole(NumberGame game) {
+			this.game = game;
 		}
-	}
-	
+		
+		/**
+		 * This method is called whenever the observed object is changed.
+		 * @param subject the observable object.
+		 * @param info an argument passed to the notifyObservers method.
+		 */
+		@Override
+		public void update(Observable subject, Object info) {
+			if(info != null) System.out.println(info);
+		}
 }

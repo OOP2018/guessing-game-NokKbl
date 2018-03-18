@@ -1,12 +1,15 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class GuessingGameController {
-	private KunyarukGame game;
+	private NumberGame game;
 	private CounterView view2;
 	private LastGuessView view3;
+	private int upperbound;
+	
 	@FXML
 	Label topMessage;
 	@FXML
@@ -17,12 +20,21 @@ public class GuessingGameController {
 	Label boundMessage;
 	@FXML
 	TextField inputField;
+	@FXML
+	Button guess;
+	@FXML
+	Button clear;
+	@FXML
+	Button newGame;
+	@FXML
+	Button exitGame;
 	
 	/**
 	 * Create a new GuessingGameController.
 	 */
 	public GuessingGameController() {
-		game = new KunyarukGame();
+		upperbound = 200;
+		game = new KunyarukGame(upperbound);
 		view2 = new CounterView(game);
 		view3 = new LastGuessView(game);
 	}
@@ -51,6 +63,12 @@ public class GuessingGameController {
 		inputField.clear();
 		statusMessage.setText(game.getMessage());
 	}
+	/**
+	 * Clear inputField.
+	 */
+	public void clearInput(ActionEvent event) {
+		inputField.clear();
+	}
 	
 	/**
 	 * Get text from TextField and return the value in int.
@@ -58,5 +76,24 @@ public class GuessingGameController {
 	 */
 	public int lastGuess() {
 		return Integer.parseInt(inputField.getText());
+	}
+	
+	/**
+	 * Play new game.
+	 */
+	public void newGuessingGame(ActionEvent event) {
+		view2.close();
+		view3.close();
+		game = new KunyarukGame(upperbound);
+		view2 = new CounterView(game);
+		view3 = new LastGuessView(game);
+		boundMessage.setText("Can you guess a number between 1 and " + game.getUpperBound() + " that I'm thinking of?");
+	}
+	
+	/**
+	 * Exit game.
+	 */
+	public void exit(ActionEvent event) {
+		System.exit(-1);
 	}
 }
