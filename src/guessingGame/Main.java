@@ -1,3 +1,5 @@
+package guessingGame;
+
 import java.net.URL;
 
 import javafx.application.Application;
@@ -16,6 +18,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	public static final String UI_FILE = "GuessingGameUI.fxml";
+	private NumberGame game = new KunyarukGame(200);
+	public static GameConsole view;
+	public static CounterView view2;
+	public static LastGuessView view3;
+	
 	/**
 	 * The start method is called after the init method has returned,
 	 * and after the system is ready for the application to begin running.
@@ -23,10 +30,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		NumberGame game = new KunyarukGame();
 		
 		try {
-			URL url = getClass().getResource("GuessingGameUI.fxml");
+			URL url = getClass().getResource(UI_FILE);
 			if (url == null) {
 				System.out.println("Couldn't find file: GuessingGameUI.fxml");
 				Platform.exit();
@@ -36,6 +42,7 @@ public class Main extends Application {
 			GuessingGameController controller = loader.getController();
 			
 			// Dependency Injection:
+			controller.setGuessingGame((KunyarukGame) game);
 			controller.init();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -47,8 +54,16 @@ public class Main extends Application {
 			return;
 		}
 		
-		GameConsole view = new GameConsole(game);
+		view = new GameConsole(game);
 		game.addObserver(view);
+		
+		view2 = new CounterView(game);
+		game.addObserver(view2);
+		view2.run();
+		
+		view3 = new LastGuessView(game);
+		game.addObserver(view3);
+		view3.run();
 	}
 	
 	public static void main(String[] args) {

@@ -1,3 +1,5 @@
+package guessingGame;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,9 +8,6 @@ import javafx.scene.control.TextField;
 
 public class GuessingGameController {
 	private NumberGame game;
-	private CounterView view2;
-	private LastGuessView view3;
-	private int upperbound;
 	
 	@FXML
 	Label topMessage;
@@ -30,16 +29,6 @@ public class GuessingGameController {
 	Button exitGame;
 	
 	/**
-	 * Create a new GuessingGameController.
-	 */
-	public GuessingGameController() {
-		upperbound = 200;
-		game = new KunyarukGame(upperbound);
-		view2 = new CounterView(game);
-		view3 = new LastGuessView(game);
-	}
-	
-	/**
 	 * Initialize the text that the label will show.
 	 */
 	@FXML
@@ -52,14 +41,18 @@ public class GuessingGameController {
 	}
 	
 	/**
+	 * Set KunyarukGame.
+	 * @param game is KunyarukGame.
+	 */
+	public void setGuessingGame(KunyarukGame game) {
+		this.game = game;
+	}
+	
+	/**
 	 * Play the guessing game and show status message.
 	 */
 	public void enterPress(ActionEvent event) {
 		game.guess(lastGuess());
-		game.addObserver(view2);
-		view2.run();
-		game.addObserver(view3);
-		view3.run(lastGuess());
 		inputField.clear();
 		statusMessage.setText(game.getMessage());
 	}
@@ -82,12 +75,23 @@ public class GuessingGameController {
 	 * Play new game.
 	 */
 	public void newGuessingGame(ActionEvent event) {
-		view2.close();
-		view3.close();
-		game = new KunyarukGame(upperbound);
-		view2 = new CounterView(game);
-		view3 = new LastGuessView(game);
+		game.deleteObservers();
+		Main.view2.close();
+		
+		game = new KunyarukGame();
+		inputField.clear();
 		boundMessage.setText("Can you guess a number between 1 and " + game.getUpperBound() + " that I'm thinking of?");
+		statusMessage.setText(game.toString());
+		
+		Main.view = new GameConsole(game);
+		game.addObserver(Main.view);
+		
+		Main.view2 = new CounterView(game);
+		game.addObserver(Main.view2);
+		Main.view2.run();
+		
+		game.addObserver(Main.view3);
+		Main.view3.run();
 	}
 	
 	/**

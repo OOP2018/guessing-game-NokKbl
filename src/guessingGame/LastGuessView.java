@@ -1,3 +1,5 @@
+package guessingGame;
+
 import java.util.Observable;
 
 import javafx.geometry.Insets;
@@ -8,11 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-/**
- * A Controller for a window that shows the value of a Counter.
- * @author Kunyaruk Katebunlu
- */
-public class CounterView extends Stage implements java.util.Observer {
+public class LastGuessView extends Stage implements java.util.Observer {
 	/** the stage (top-level window) for showing scene */
 	private Stage stage;
 	/** a counter to show value of */
@@ -24,13 +22,13 @@ public class CounterView extends Stage implements java.util.Observer {
 	 * Initialize a CounterView, which shows value of a counter.
 	 * @param counter the Counter to show.
 	 */
-	public CounterView(NumberGame game) {
+	public LastGuessView(NumberGame game) {
 		this.game = game;
 		initComponents();
 	}
 	
 	/**
-	 * Initialize a CounterView.
+	 * Initialize a LastGuessView.
 	 */
 	private void initComponents() {
 		stage = this;
@@ -44,23 +42,23 @@ public class CounterView extends Stage implements java.util.Observer {
 		root.getChildren().add(label);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Count");
+		stage.setTitle("Last number");
 		stage.sizeToScene();
 	}
 	
 	/** Show the window and update the counter value. */
 	public void run() {
 		stage.show();
-		displayCount();
+		displayLastGuess(0);
 	}
 	
 	/**
-	 * Display the value of round counter.
+	 * Display the value of the last guessed number.
 	 */
-	public void displayCount() {
-		label.setText( String.format("Guess count: %2d", game.getCount()) );
+	public void displayLastGuess(int lastGuess) {
+		label.setText( String.format("Last guessed: %2d", lastGuess) );
 	}
-	
+
 	/**
 	 * This method is called whenever the observed object is changed.
 	 * @param o the observable object.
@@ -68,6 +66,7 @@ public class CounterView extends Stage implements java.util.Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		displayCount();
-	}	
+		int lastGuess = (int) arg;
+		displayLastGuess(lastGuess);
+	}
 }

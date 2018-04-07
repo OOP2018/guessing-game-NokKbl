@@ -1,3 +1,5 @@
+package guessingGame;
+
 import java.util.Observable;
 
 import javafx.geometry.Insets;
@@ -8,8 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class LastGuessView extends Stage implements java.util.Observer {
-	private int lastGuess;
+/**
+ * A Controller for a window that shows the value of a Counter.
+ * @author Kunyaruk Katebunlu
+ */
+public class CounterView extends Stage implements java.util.Observer {
 	/** the stage (top-level window) for showing scene */
 	private Stage stage;
 	/** a counter to show value of */
@@ -21,13 +26,13 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	 * Initialize a CounterView, which shows value of a counter.
 	 * @param counter the Counter to show.
 	 */
-	public LastGuessView(NumberGame game) {
+	public CounterView(NumberGame game) {
 		this.game = game;
 		initComponents();
 	}
 	
 	/**
-	 * Initialize a LastGuessView.
+	 * Initialize a CounterView.
 	 */
 	private void initComponents() {
 		stage = this;
@@ -41,24 +46,23 @@ public class LastGuessView extends Stage implements java.util.Observer {
 		root.getChildren().add(label);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Last number");
+		stage.setTitle("Count");
 		stage.sizeToScene();
 	}
 	
 	/** Show the window and update the counter value. */
-	public void run(int lastGuess) {
-		this.lastGuess = lastGuess;
+	public void run() {
 		stage.show();
-		displayLastGuess();
+		displayCount();
 	}
 	
 	/**
-	 * Display the value of the last guessed number.
+	 * Display the value of round counter.
 	 */
-	public void displayLastGuess() {
-		label.setText( String.format("Last guessed: %2d", lastGuess) );
+	public void displayCount() {
+		label.setText( String.format("Guess count: %2d", game.getCount()) );
 	}
-
+	
 	/**
 	 * This method is called whenever the observed object is changed.
 	 * @param o the observable object.
@@ -66,6 +70,6 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		displayLastGuess();
-	}
+		displayCount();
+	}	
 }

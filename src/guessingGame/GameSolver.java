@@ -1,3 +1,5 @@
+package guessingGame;
+
 /**
  * This class is for automatically guess the secret number for any NumberGame.
  * @author Kunyaruk Katebunlu

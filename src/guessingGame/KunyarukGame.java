@@ -1,3 +1,5 @@
+package guessingGame;
+
 import java.util.Random;
 
 /**
@@ -40,9 +42,12 @@ public class KunyarukGame extends NumberGame {
      * @return true if guess is correct, false otherwise
      */
 	public boolean guess(int number) {
+		countRound++;
+		
 		if(number == secret) {
+			setChanged();
+			notifyObservers(number);
 			setMessage("Wow! Correct!! I'm thinking of "+secret+".");
-			countRound++;
 			return true;
 		}
 		
@@ -50,7 +55,8 @@ public class KunyarukGame extends NumberGame {
 		else if (number > secret && number <= this.upperBound) setMessage("Oh! " + number + " is too large.");
 		else setMessage("Oops! Please input a valid number!!");
 		
-		countRound++;
+		setChanged();
+		notifyObservers(number);
 		return false;
 	}
 	
