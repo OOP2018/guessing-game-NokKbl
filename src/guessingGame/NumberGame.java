@@ -13,7 +13,7 @@ package guessingGame;
 public class NumberGame extends java.util.Observable {
 	/** A helpful message for user. */
 	private String message;
-
+	
     /** Initialize a new default game. */
     public NumberGame() {
 		// initialize your game.
@@ -62,6 +62,14 @@ public class NumberGame extends java.util.Observable {
 	 * @return the number of round that player guess.
 	 */
 	public int getCount() {
+		return 0;
+	}
+	
+	/**
+	 * Get text from TextField and return the value in int.
+	 * @return last guessed value
+	 */
+	public int getLastGuess() {
 		return 0;
 	}
 	

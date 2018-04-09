@@ -47,10 +47,6 @@
       </TextField>
       <HBox alignment="CENTER" prefHeight="51.0" prefWidth="587.0">
          <children>
-            <Button fx:id="newGame" mnemonicParsing="false" onAction="#newGuessingGame" prefHeight="27.0" prefWidth="90.0" text="New Game">
-               <HBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </HBox.margin></Button>
             <Button fx:id="guess" mnemonicParsing="false" onAction="#enterPress" prefHeight="27.0" prefWidth="90.0" text="Guess">
                <HBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />

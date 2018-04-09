@@ -14,6 +14,7 @@ public class KunyarukGame extends NumberGame {
     private int secret;
     /** count guesses */
     private int countRound = 0;
+    private int lastGuess = 0;
 
     /** Initialize a new default game. */
     public KunyarukGame() {
@@ -43,6 +44,7 @@ public class KunyarukGame extends NumberGame {
      */
 	public boolean guess(int number) {
 		countRound++;
+		lastGuess = number;
 		
 		if(number == secret) {
 			setChanged();
@@ -56,7 +58,7 @@ public class KunyarukGame extends NumberGame {
 		else setMessage("Oops! Please input a valid number!!");
 		
 		setChanged();
-		notifyObservers(number);
+		notifyObservers();
 		return false;
 	}
 	
@@ -72,6 +74,14 @@ public class KunyarukGame extends NumberGame {
 	 */
 	public int getCount() {
 		return this.countRound;
+	}
+	
+	/**
+	 * Get text from TextField and return the value in int.
+	 * @return last guessed value
+	 */
+	public int getLastGuess() {
+		return lastGuess;
 	}
 	
     @Override

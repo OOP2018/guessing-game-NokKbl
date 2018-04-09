@@ -72,29 +72,6 @@ public class GuessingGameController {
 	}
 	
 	/**
-	 * Play new game.
-	 */
-	public void newGuessingGame(ActionEvent event) {
-		game.deleteObservers();
-		Main.view2.close();
-		
-		game = new KunyarukGame();
-		inputField.clear();
-		boundMessage.setText("Can you guess a number between 1 and " + game.getUpperBound() + " that I'm thinking of?");
-		statusMessage.setText(game.toString());
-		
-		Main.view = new GameConsole(game);
-		game.addObserver(Main.view);
-		
-		Main.view2 = new CounterView(game);
-		game.addObserver(Main.view2);
-		Main.view2.run();
-		
-		game.addObserver(Main.view3);
-		Main.view3.run();
-	}
-	
-	/**
 	 * Exit game.
 	 */
 	public void exit(ActionEvent event) {

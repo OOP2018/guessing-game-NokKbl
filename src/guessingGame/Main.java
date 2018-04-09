@@ -18,10 +18,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	public static final String UI_FILE = "GuessingGameUI.fxml";
-	private NumberGame game = new KunyarukGame(200);
-	public static GameConsole view;
-	public static CounterView view2;
-	public static LastGuessView view3;
 	
 	/**
 	 * The start method is called after the init method has returned,
@@ -30,6 +26,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		NumberGame game = new KunyarukGame(200);
 		
 		try {
 			URL url = getClass().getResource(UI_FILE);
@@ -54,14 +51,14 @@ public class Main extends Application {
 			return;
 		}
 		
-		view = new GameConsole(game);
+		GameConsole view = new GameConsole(game);
 		game.addObserver(view);
 		
-		view2 = new CounterView(game);
+		CounterView view2 = new CounterView(game);
 		game.addObserver(view2);
 		view2.run();
 		
-		view3 = new LastGuessView(game);
+		LastGuessView view3 = new LastGuessView(game);
 		game.addObserver(view3);
 		view3.run();
 	}

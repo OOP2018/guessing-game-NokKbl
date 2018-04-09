@@ -49,14 +49,14 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	/** Show the window and update the counter value. */
 	public void run() {
 		stage.show();
-		displayLastGuess(0);
+		displayLastGuess();
 	}
 	
 	/**
 	 * Display the value of the last guessed number.
 	 */
-	public void displayLastGuess(int lastGuess) {
-		label.setText( String.format("Last guessed: %2d", lastGuess) );
+	public void displayLastGuess() {
+		label.setText( String.format("Last guessed: %2d", game.getLastGuess()) );
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LastGuessView extends Stage implements java.util.Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		int lastGuess = (int) arg;
-		displayLastGuess(lastGuess);
+		//int lastGuess = (int) arg;
+		displayLastGuess();
 	}
 }
